@@ -33,5 +33,5 @@ def run_sql(args: RunSQLArgs, limit: int = 50) -> str:
 if __name__ == "__main__":
     print(get_schema())
     print(run_sql(RunSQLArgs(query="SELECT category, SUM(total_price) FROM orders o JOIN products p USING(product_id) GROUP BY category")))
-    print(run_sql(RunSQLArgs(query="SELECT * FROM yoxdur")))   # xəta halını yoxla
-    print(run_sql(RunSQLArgs(query="DELETE FROM orders")))     # yazma cəhdi bloklanmalıdır
+    print(run_sql(RunSQLArgs(query="SELECT * FROM yoxdur")))   
+    print(run_sql(RunSQLArgs(query="DELETE FROM orders")))     
