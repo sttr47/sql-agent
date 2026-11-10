@@ -1,0 +1,21 @@
+{
+  "question": "Hansı kateqoriyanın ümumi gəliri ən yüksəkdir?",
+  "trace": [
+    {
+      "step": 1,
+      "tool": "get_schema",
+      "arguments": "{}",
+      "result": "customers: customer_id INTEGER, name TEXT, region TEXT\nproducts: product_id INTEGER, name TEXT, category TEXT, unit_price REAL\norders: order_id INTEGER, customer_id INT, product_id INT, quantity INT, order_date TEXT, total_price REAL"
+    },
+    {
+      "step": 2,
+      "tool": "run_sql",
+      "arguments": "{\"query\":\"SELECT p.category, SUM(o.total_price) AS total_revenue\\nFROM orders o\\nJOIN products p ON o.product_id = p.product_id\\nGROUP BY p.category\\nORDER BY total_revenue DESC\\nLIMIT 1;\"}",
+      "result": "['category', 'total_revenue']\n('Electronics', 1230548.549999996)"
+    },
+    {
+      "step": 3,
+      "final_answer": "Ən yüksək ümumi gəlir **Electronics** (elektronika) kateqoriyasına aiddir və bu kateqoriya üçün toplam gəlir təxminən **1,230,549** manatdır."
+    }
+  ]
+}

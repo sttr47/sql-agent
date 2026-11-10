@@ -1,0 +1,27 @@
+{
+  "question": "Sabah satışlar nə qədər olacaq?",
+  "trace": [
+    {
+      "step": 1,
+      "tool": "get_schema",
+      "arguments": "{}",
+      "result": "customers: customer_id INTEGER, name TEXT, region TEXT\nproducts: product_id INTEGER, name TEXT, category TEXT, unit_price REAL\norders: order_id INTEGER, customer_id INT, product_id INT, quantity INT, order_date TEXT, total_price REAL"
+    },
+    {
+      "step": 2,
+      "tool": "run_sql",
+      "arguments": "{\"query\":\"SELECT SUM(total_price) AS tomorrow_sales FROM orders WHERE order_date = '2026-11-11';\"}",
+      "result": "['tomorrow_sales']\n(None,)"
+    },
+    {
+      "step": 3,
+      "tool": "run_sql",
+      "arguments": "{\"query\":\"SELECT DISTINCT order_date FROM orders LIMIT 20;\"}",
+      "result": "['order_date']\n('2025-01-01',)\n('2025-01-02',)\n('2025-01-03',)\n('2025-01-04',)\n('2025-01-05',)\n('2025-01-06',)\n('2025-01-07',)\n('2025-01-08',)\n('2025-01-09',)\n('2025-01-10',)\n('2025-01-11',)\n('2025-01-12',)\n('2025-01-13',)\n('2025-01-14',)\n('2025-01-15',)\n('2025-01-16',)\n('2025-01-17',)\n('2025-01-18',)\n('2025-01-19',)\n('2025-01-20',)"
+    },
+    {
+      "step": 4,
+      "final_answer": "Mənim əlçatan məlumat bazam yalnız keçmiş sifarişləri və onların məbləğlərini ehtiva edir, gələcəkdəki satışları proqnozlaşdırmaq üçün heç bir məlumat və ya model mövcud deyil. Buna görə də **sabaha (2026‑11‑11) satışların nə qədər olacağını** verilənlər bazasından hesablamaq mümkün deyil. Əgər keçmiş tarixlər üzrə ümumi və ya gündəlik satış məbləğlərini görmək istəyirsinizsə, həmin məlumatları təqdim edə bilərəm."
+    }
+  ]
+}
