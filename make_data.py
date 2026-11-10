@@ -31,7 +31,6 @@ d, oid = date(2025, 1, 1), 1
 while d <= date(2025, 12, 31):
     for _ in range(random.randint(8, 15)):
         p = random.choice(products)
-        # Bilərəkdən qoyulan hadisə: mart ayında Electronics satışı kəskin düşür
         if p[1] == "Electronics" and d.month == 3 and random.random() < 0.6:
             continue
         qty = random.randint(1, 4)
