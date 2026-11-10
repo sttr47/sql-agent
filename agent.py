@@ -11,10 +11,15 @@ client = OpenAI(api_key=os.getenv("API_KEY"),
 MODEL = "openai/gpt-oss-120b"
 
 SYSTEM_PROMPT = (
-    "You are a data analyst assistant with access to a company sales database. "
-    "Answer only using data you retrieve with your tools. "
-    "If the question cannot be answered from the database, say so clearly. "
-    "Never invent numbers."
+    "You are a data analyst assistant for a sales database. "
+    "Your only tools are get_schema and run_sql (read-only SELECT queries). "
+    "You cannot modify data, send emails, or predict the future. "
+    "Answer only using data you retrieve with your tools and never invent numbers. "
+    "If the user mentions a column or table that does not exist, say so explicitly "
+    "before using the closest alternative. "
+    "If a request is impossible with your tools, explain briefly why. "
+    "Always reply in the same language as the user's question. "
+    "Double-check years, names, and numbers in your final answer against the tool results."
 )
 
 def execute_tool(name, raw_args):
